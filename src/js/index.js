@@ -2,6 +2,17 @@ import "babel-polyfill";
 import '../css/index.scss';
 
 import Interface from './components/userInterface.js'
+import ChessBoard from './components/chessboard';
+import config from './config'
 
-
+/* 实例化界面 */
 const userInterface = new Interface();
+/* 实例化棋盘 */
+const chessBoard = new ChessBoard(document.getElementById('playground'), config.lineNum, true)
+
+// DEMO 修改点击事件demo
+Interface.basicButton[0].callBack = function () {
+    console.log('test')
+}
+
+
