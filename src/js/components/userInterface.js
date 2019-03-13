@@ -33,6 +33,10 @@ const Interface = class {
             })
         }
     }
+    getOffsetXY () {
+        const target = document.querySelector('#playground')
+        this.playgroundOffsetX = target
+    }
 }
 Interface.basicButton = [
     {
