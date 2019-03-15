@@ -1,0 +1,12 @@
+{
+    "black": {
+        "text": "黑",
+        "status": "1",
+        "color": "#111111"
+    },
+    "white": {
+        "text": "白",
+        "status": "2",
+        "color": "#f1f1f1"
+    }
+}

@@ -1,7 +1,11 @@
 .playground {
     position: relative;
+    * {
+        pointer-events: none;
+    }
     .row {
         display: flex;
+        pointer-events: none;
     }
     .least {
         // width: 16px;
