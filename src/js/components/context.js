@@ -10,6 +10,7 @@ const Context = class {
         this.current = 'black';
         this.history = []; // 历史步骤
         this.arr = []; // 棋盘的数据映射
+        this.arr2 = [] // 竖向的棋盘数据映射
         this.chessWH = config.blockWH; // 棋子的宽高
         this._init();
     }
@@ -23,10 +24,13 @@ const Context = class {
         const length = config.lineNum;
         for (let i = 0; i < length; i++) {
             const arr = []
+            const arr2 = []
             for (let i = 0; i < length; i++) {
                 arr.push(0)
+                arr2.push(0)
             }
             this.arr.push(arr)
+            this.arr2.push(arr2)
         }
     }
     /* 改变当前颜色 */
@@ -47,12 +51,12 @@ const Context = class {
         }
         const currentStatus = Number(chessColorStatusMap[this.current].status)
         this.arr[y][x] = currentStatus;
+        this.arr2[x][y] = currentStatus; // 为竖向棋盘赋值
         this.history.push({ // 增加历史
             x: x,
             y: y,
             status: currentStatus  // 记录当前历史位置 是哪种棋
         })
-        console.log(this.arr)
         /* 创建棋子 */
         const chess = new Chess(x, y, chessColorStatusMap[this.current].color)
         playground.appendChild(chess);

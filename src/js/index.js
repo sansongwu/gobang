@@ -5,7 +5,7 @@ import Interface from './components/userInterface.js'
 import ChessBoard from './components/chessboard';
 import config from './config'
 import Context from './components/context'
-import CheckResult from './components/winOrLose'
+import WinOrLose from './components/winOrLose'
 
 /* 实例化界面 */
 const userInterface = new Interface();
@@ -16,7 +16,7 @@ const chessBoard = new ChessBoard(document.getElementById('playground'), config.
 const context = new Context()
 
 /* 实例化 判断胜负类 */
-const checkResult = new CheckResult(context)
+const winOrLose = new WinOrLose(context)
 
 // DEMO 修改按钮点击事件demo
 Interface.basicButton[0].callBack = function () {
@@ -30,7 +30,7 @@ chessBoard.addEventListener('click', e => {
     context.addChess(e.offsetX, e.offsetY, chessBoard)
     /* 是否继续  一方胜利不继续  先手双3不继续 棋盘满了不继续 */
 
-    if (checkResult.getResult()) {
+    if (winOrLose.getResult()) {
         alert('当前色胜利')
         return
     }
