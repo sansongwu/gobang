@@ -12,6 +12,7 @@ const Context = class {
         this.arr = []; // 棋盘的数据映射
         this.arr2 = [] // 竖向的棋盘数据映射
         this.chessWH = config.blockWH; // 棋子的宽高
+        this.isGameover = true; // 游戏是否结束
         this._init();
     }
     _init() {
@@ -61,6 +62,14 @@ const Context = class {
         const chess = new Chess(x, y, chessColorStatusMap[this.current].color)
         playground.appendChild(chess);
         
+    }
+    /* 游戏开始 */
+    gamestart() {
+        this.isGameover = false;
+    }
+    /* 游戏结束 */
+    gameover() {
+        this.isGameover = true;
     }
 }
 

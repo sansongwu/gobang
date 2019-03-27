@@ -29,13 +29,19 @@ Interface.basicButton[0].callBack = function () {
 
 // 点击棋盘
 chessBoard.addEventListener('click', e => {
+    if (context.isGameover) {
+        return
+    }
     // console.log(e.offsetX)
     // console.log(e.offsetY)
     context.addChess(e.offsetX, e.offsetY, chessBoard)
     /* 是否继续  一方胜利不继续  先手双3不继续 棋盘满了不继续 */
 
     if (winOrLose.getResult()) {
-        alert('当前色胜利')
+        context.gameover() // 结束游戏状态
+        setTimeout(() => {
+            alert('当前色胜利')
+        }, 1000)
         return
     }
 

@@ -64,13 +64,13 @@ module.exports={
     plugins: [
         new HtmlWebpackPlugin(
         {          
-            template: './src/index.html',// 模板文件          
+            template: './src/index.html', // 模板文件          
             filename: 'index.html'
         }
         ),
-        new CopyWebpackPlugin([
-            {from:'./src/img',to:'./img'}
-        ]),
+        // new CopyWebpackPlugin([
+        //     {from:'./src/img',to:'./img'}
+        // ]),
         extractCSS,
         extractSASS,
         new CleanWebpackPlugin(['dist','build'],{

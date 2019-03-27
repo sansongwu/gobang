@@ -20,7 +20,10 @@ const CheckResult = class {
     getResult () {
         const calculateTargetStatus = chessColorStatusMap[this.context.current].status; // 获取当前颜色的状态 只判断当前颜色是否胜利 运算数量减半
         if (this.checkRow(calculateTargetStatus)) {
-            return true
+            return true;
+        }
+        if (this.checkSlope(calculateTargetStatus)) {
+            return true;
         }
         return false;
     }
@@ -65,26 +68,42 @@ const CheckResult = class {
         return false
     }
     /* 判断斜行 */
-    checkSlope () {
+    checkSlope (targetStatus) {
         const sourceMap = this.context.arr;
         const sourceMap2 = this.context.arr2
 
         /* 获取遍历次数 */
         const times = 2 * this.squareWidth - 1; // 如果是4X4的实例棋盘 那么值是 7
         /* 获取中间的数值 用来计算循环内部的循环次数 */
-        const midTimes = (times + 1) / 2 // 如果是4X4的实例棋盘 那么值是 4
+        const midTimes = ((times + 1) / 2 - 1) // 如果是4X4的实例棋盘 那么值是 4
         for (let i = 0; i < times; i++) {
             /* 每行遍历的次数  即斜行每行的长度 */
-            const rowTimes = i <= (midTimes - 1) ? (i + 1) : (times - i); // 这通过了 01 验算
+            const rowTimes = i <= midTimes ? (i + 1) : (times - i); // 这通过了 01 验算
             if (rowTimes < 5) {
                 continue; // 长度都不到5 没check的必要了
             }
+            let continuousNumber = 0;
+            let continuousNumber2 = 0;
             for (let j = 0; j < rowTimes; j++) {
+                /* 根据矩阵规律 获取坐标 */
                 let rowNum = j;
-                let colNum = midTimes - i + j - 1;
-
+                let colNum = Math.abs(midTimes - i) + j;
+                if (i <= midTimes) { // 小于等于中间值的那些行 直接用坐标值
+                    continuousNumber = sourceMap[rowNum][colNum] == targetStatus ? continuousNumber + 1 : 0;
+                    continuousNumber2 = sourceMap2[rowNum][colNum] == targetStatus ? continuousNumber2 + 1 : 0;
+                    if (continuousNumber == 5 || continuousNumber == 5) {
+                        return true
+                    }
+                } else { // 大于中间行的 互换坐标位置
+                    continuousNumber = sourceMap[colNum][rowNum] == targetStatus ? continuousNumber + 1 : 0;
+                    continuousNumber2 = sourceMap2[colNum][rowNum] == targetStatus ? continuousNumber2 + 1 : 0;
+                    if (continuousNumber == 5 || continuousNumber == 5) {
+                        return true
+                    }
+                }
             }
         }
+        return false;
     }
 }
 

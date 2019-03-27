@@ -33,10 +33,10 @@ const Interface = class {
             })
         }
     }
-    getOffsetXY () {
-        const target = document.querySelector('#playground')
-        this.playgroundOffsetX = target
-    }
+    // getOffsetXY () {
+    //     const target = document.querySelector('#playground')
+    //     this.playgroundOffsetX = target
+    // }
 }
 Interface.basicButton = [
     {
@@ -44,6 +44,13 @@ Interface.basicButton = [
         text: '开始',
         callBack() {
             console.log('点击了开始')
+        }
+    },
+    {
+        name: 'restart',
+        text: '重开',
+        callBack() {
+            console.log('点击了重开')
         }
     },
     {
