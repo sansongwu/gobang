@@ -7,6 +7,10 @@ import config from './config'
 import Context from './components/context'
 import WinOrLose from './components/winOrLose'
 
+if (config.lineNum < 6) {
+    console.error('棋盘太小')
+}
+
 /* 实例化界面 */
 const userInterface = new Interface();
 /* 实例化棋盘 */

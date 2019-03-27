@@ -16,8 +16,6 @@ const CheckResult = class {
         this.sourceMap2 = this.context.arr2;
         // this.createColArr()
     }
-    /* 获取 把矩阵斜过来后 的行数 */
-    getTiltLine
     /* 返回true 代表当前色胜利 false 代表无胜利方 游戏继续 */
     getResult () {
         const calculateTargetStatus = chessColorStatusMap[this.context.current].status; // 获取当前颜色的状态 只判断当前颜色是否胜利 运算数量减半
@@ -72,17 +70,19 @@ const CheckResult = class {
         const sourceMap2 = this.context.arr2
 
         /* 获取遍历次数 */
-        const times = 2 * this.squareWidth - 1;
+        const times = 2 * this.squareWidth - 1; // 如果是4X4的实例棋盘 那么值是 7
         /* 获取中间的数值 用来计算循环内部的循环次数 */
-        const midTimes = (times + 1) / 2
+        const midTimes = (times + 1) / 2 // 如果是4X4的实例棋盘 那么值是 4
         for (let i = 0; i < times; i++) {
             /* 每行遍历的次数  即斜行每行的长度 */
-            const rowTimes = i <= midTimes ? i : (times - i + 1);
+            const rowTimes = i <= (midTimes - 1) ? (i + 1) : (times - i); // 这通过了 01 验算
             if (rowTimes < 5) {
                 continue; // 长度都不到5 没check的必要了
             }
             for (let j = 0; j < rowTimes; j++) {
-                let rowNum
+                let rowNum = j;
+                let colNum = midTimes - i + j - 1;
+
             }
         }
     }
